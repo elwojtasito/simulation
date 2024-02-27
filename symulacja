@@ -1,0 +1,60 @@
+const zonesData = [
+    { 
+        zone: 1, 
+        animals: ['Lew', 'Słoń'], 
+        plants: ['Drzewo baobab', 'Krzew akacji'], 
+        weather: { temperature: 30, humidity: 80, precipitation: 'Małe', wind: 'Łagodny' } 
+    },
+    { 
+        zone: 2, 
+        animals: ['Kangur', 'Wombat'], 
+        plants: ['Eukaliptus', 'Akacja'], 
+        weather: { temperature: 25, humidity: 70, precipitation: 'Średnie', wind: 'Umiarkowany' } 
+    },
+    { 
+        zone: 3, 
+        animals: ['Niedźwiedź', 'Ryś'], 
+        plants: ['Sosna', 'Brzoza'], 
+        weather: { temperature: 15, humidity: 60, precipitation: 'Duże', wind: 'Silny' } 
+    },
+    { 
+        zone: 4, 
+        animals: ['Jaguar', 'Tukan'], 
+        plants: ['Palmowy las deszczowy', 'Gumowiec'], 
+        weather: { temperature: 25, humidity: 90, precipitation: 'Bardzo duże', wind: 'Bardzo silny' } 
+    },
+    { 
+        zone: 5, 
+        animals: ['Orzeł', 'Rysiek'], 
+        plants: ['Tundra', 'Mchy i porosty'], 
+        weather: { temperature: 0, humidity: 50, precipitation: 'Niskie', wind: 'Wietrznie' } 
+    }
+];
+
+// Funkcja generująca informacje o populacji i warunkach pogodowych w danej strefie
+function showZoneInfo(zone) {
+    const infoDiv = document.getElementById('zone-info');
+    const zoneData = zonesData.find(data => data.zone === zone);
+    if (zoneData) {
+        const animalsList = zoneData.animals.map(animal => <li><span class="animal-signature">🐾</span> ${animal}</li>).join('');
+        const plantsList = zoneData.plants.map(plant => <li><span class="plant-signature">🌿</span> ${plant}</li>).join('');
+        const weatherInfo = `
+            <h3>Warunki pogodowe:</h3>
+            <p><span class="weather-signature">☀️</span> Temperatura: ${zoneData.weather.temperature}°C</p>
+            <p><span class="weather-signature">💧</span> Wilgotność: ${zoneData.weather.humidity}%</p>
+            <p><span class="weather-signature">☔️</span> Opady: ${zoneData.weather.precipitation}</p>
+<p><span class="weather-signature">💨</span> Wiatr: ${zoneData.weather.wind}</p>
+        ;
+        infoDiv.innerHTML = 
+            <h2>Strefa klimatyczna ${zoneData.zone}</h2>
+            <h3>Zwierzęta:</h3>
+            <ul>${animalsList}</ul>
+            <h3>Rosliny:</h3>
+            <ul>${plantsList}</ul>
+            ${weatherInfo}
+        `;
+    } else {
+        infoDiv.innerHTML = '<p>Brak danych o tej strefie</p>';
+    }
+}
+﻿
